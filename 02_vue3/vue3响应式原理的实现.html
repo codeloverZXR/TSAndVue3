@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="box01"></div>
+  <button id="test">test</button>
+  <script>
+    /* 
+      通过Proxy(代理): 拦截对data任意属性的任意(13种)操作, 包括属性值的读写, 属性的添加, 属性的删除等...
+      通过 Reflect(反射): 动态对被代理对象的相应属性进行特定的操作 
+      可以达到深度监视的效果
+    */
+    const user = {
+      name: 'bob',
+      age: 21,
+      wife: {
+        name: 'kiti',
+        age: 20,
+        child: ['zhudi', 'tom', 'mark']
+      }
+    }
+    /* 
+    PUser是代理对象, user是被代理对象
+    后面所有的操作都是通过代理对象来操作被代理对象内部属性
+    */
+    //为user对象设置代理对象
+    const PUser = new Proxy(user, {
+      //拦截读取属性值操作
+      //target:目标对象
+      //prop:获取的属性
+      get(target, prop) {
+        console.log('get方法被调用')
+        //利用Reflect对象的静态方法返回目标对象对应属性的数据
+        return Reflect.get(target, prop)
+      },
+      //拦截 修改/添加 属性值操作
+      //target:目标对象
+      //prop:要 修改/添加 的属性
+      //value:要 修改/添加 属性对应的值
+      set(target, prop, value) {
+        console.log('set方法被调用')
+        return Reflect.set(target, prop, value)
+      },
+      //监视删除属性的操作
+      deleteProperty(target, prop) {
+        console.log('deleteProperty方法被调用')
+        return Reflect.deleteProperty(target, prop)
+      }
+    })
+    console.log(PUser.name)
+    PUser.age = 1231
+    PUser.gender = '男'
+    delete PUser.age
+    console.log(user)
+
+    // //响应式测试
+    // const box01 = document.getElementById('box01')
+    // const test = document.getElementById('test')
+    // box01.innerHTML = PUser.name
+    // test.addEventListener('click',() => {
+    //    PUser.name = 'SASD'
+    //    console.log(PUser)
+    // })
+
+  </script>
+</body>
+
+</html>

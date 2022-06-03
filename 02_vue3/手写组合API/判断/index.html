@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./tools.js"></script>
+  <script>
+    console.log(isRef(ref({})))//true
+    console.log(isRef(ref('haha')))//true
+    console.log(isRef({}))//flase
+    console.log(isReactive(reactive({})))//true
+    console.log(isReactive({name:'haha'}))//false
+    console.log(isReadonly(readonly({})))//true
+    console.log(isProxy(readonly({})))//true
+    console.log(isProxy(ref({})))
+  </script>
+</body>
+</html>

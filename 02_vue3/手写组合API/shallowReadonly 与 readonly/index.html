@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="./tools.js"></script>
+  <script>
+    const state = shallowReadonly({
+      name: 'Tom',
+      child: {
+        name: 'Bob'
+      }
+    })
+    //可以成功获取到数据
+    // state.name
+    //该对象是只读的,不可删除属性,delete拦截失败
+    // state.name = '小明'
+    //该对象是只读的,不可删除属性,delete拦截失败
+    // delete(state.name)
+    //属性可以修改
+    // state.child.name = '小刚'
+    // console.log(state.child.name)
+    const state1 = readonly({
+      name: '小名',
+      wife: {
+        name: '小美'
+      }
+    })
+    //可以成功获取到数据
+    // state1.name
+    //该对象是只读的,不可修改或添加属性,set拦截失败
+    // state1.name = 'hhh'
+    //该对象是只读的,不可删除属性,delete拦截失败
+    // delete(state1.name)
+    //数据无法修改
+    state1.wife.name = 'zzz'
+  </script>
+</body>
+
+</html>

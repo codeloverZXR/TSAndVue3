@@ -1,0 +1,28 @@
+<template>
+  <!-- vue3组件的html模板中可以没有根标签 -->
+  <xxx></xxx>
+</template>
+
+<script lang="ts">
+//这里可以使用ts代码
+
+//引入defineComponent函数，目的是定义一个组件，内部可以传入一个配置对象
+import { defineComponent } from "vue";
+
+//引入一个子集组件
+// import xxx from './components/HelloWorld.vue';
+
+//暴露出去一个定义好的组件
+export default defineComponent({
+  //当前组件的名字叫做App
+  name: "App",
+  //注册它的子组件
+  components: {
+    xxx,
+  },
+});
+</script>
+
+<style>
+  
+</style>

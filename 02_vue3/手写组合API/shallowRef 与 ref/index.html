@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="./tools.js"></script>
+  <script>
+    const state = shallowRef({
+      name: ' 小明',
+      wife: {
+        name: '小美'
+      }
+    })
+    //不经过get
+    // console.log(state._value.name)
+    //经过get
+    // console.log(state.value.name)
+    //可以劫持到(浅劫持)
+    // state.value = '小刚'
+    //劫持不到(深劫持)
+    // state.value.name = 'xxxx'
+    const state1 = ref({
+      name:'Tom',
+      wife:{
+        name:'Bob'
+      }
+    })
+    //触发了ref和reactive的两种监视，一种是 访问value，一种是访问name
+    // state1.value.name
+    //可以深度监视
+    // state1.value.wife.name = 'hahah'
+    state1.value = 'hahah'
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="./shallowReactiveAndreactive.js"></script>
+  <script>
+    const stateByShallow = shallowReactive({
+      name: 'Tom',
+      age: 28,
+      wife: {
+        name: 'kate'
+      }
+    })
+    //只有get拦截
+    // stateByShallow.name
+    //只有set拦截
+    // stateByShallow.age = 20
+    //只有get拦截，不能修改值
+    // stateByShallow.wife.name = 'Bob'
+    const state = reactive({
+      name: '小明',
+      age: 99,
+      wife: {
+        name: '小红'
+      }
+    })
+    // 只有get拦截
+    // state.name
+    //只有set拦截
+  //  state.age = 77
+  //既有get，又有set拦截
+   state.wife.name = '小鱼'
+  </script>
+</body>
+
+</html>
